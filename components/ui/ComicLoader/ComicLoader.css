@@ -1,0 +1,68 @@
+/* --- PRESERVED ANIMATIONS (DO NOT EDIT) --- */
+@keyframes dissolveOut {
+    0% {
+        clip-path: circle(150% at 50% 50%);
+        filter: contrast(1) brightness(1);
+        transform: scale(1);
+    }
+    20% {
+        filter: contrast(2) brightness(1.5) hue-rotate(90deg);
+        transform: scale(1.02) rotate(1deg);
+    }
+    100% {
+        clip-path: circle(0% at 50% 50%);
+        filter: contrast(5) grayscale(1);
+        transform: scale(0.8) rotate(-5deg);
+    }
+}
+
+@keyframes splatIn {
+    0% {
+        clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        transform: scale(1);
+    }
+}
+
+.animate-dissolve-out {
+    animation: dissolveOut 0.8s forwards cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.animate-splat-in {
+    animation: splatIn 0.8s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- UI STYLES --- */
+
+.bg-halftone {
+    background-image: radial-gradient(circle, #333 2px, transparent 2.5px);
+    background-size: 24px 24px;
+    background-color: #0a0a0a;
+}
+
+/* Heavy comic book outline for text */
+.text-outline-heavy {
+    -webkit-text-stroke: 3px black;
+    text-shadow: 
+        4px 4px 0px #000;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+.animate-wiggle {
+    animation: wiggle 2s ease-in-out infinite;
+}
+
+/* Helper to ensure font works if imported, otherwise fallbacks safely */
+.font-teko {
+    font-family: 'Teko', sans-serif;
+}
