@@ -11,6 +11,7 @@ import { READER_DATA } from '@/lib/data/mockComicData';
 import { ReaderHeader } from './reader/ReaderHeader';
 import { ReaderNavigation } from './reader/ReaderNavigation';
 import { ReaderProgress } from './reader/ReaderProgress';
+import { InstructionModal } from './reader/InstructionModal';
 
 interface ComicReaderProps {
     initialData?: ComicData;
@@ -28,6 +29,7 @@ export default function ComicReader({ initialData, title, backLink }: ComicReade
     const [isAutoReveal, setIsAutoReveal] = useState(false);
     const [isAllRevealed, setIsAllRevealed] = useState(false); // New state to track if "Reveal All" was used
     const [isUIHidden, setIsUIHidden] = useState(false); // Immersive Mode
+    const [showInstruction, setShowInstruction] = useState(false);
 
     const currentScene = data[currentSlide];
 
@@ -76,6 +78,20 @@ export default function ComicReader({ initialData, title, backLink }: ComicReade
         setIsAllRevealed(true); // Mark as all revealed
         setIsAutoReveal(false); // Disable auto reveal logically
     }, [data]);
+
+    useEffect(() => {
+        const hasSeen = localStorage.getItem('comic_reader_instruction_seen');
+        if (!hasSeen) {
+            setShowInstruction(true);
+        }
+    }, []);
+
+    const handleInstructionClose = (dontShowAgain: boolean) => {
+        if (dontShowAgain) {
+            localStorage.setItem('comic_reader_instruction_seen', 'true');
+        }
+        setShowInstruction(false);
+    };
 
     // Auto Reveal Timer
     useEffect(() => {
@@ -181,6 +197,11 @@ export default function ComicReader({ initialData, title, backLink }: ComicReade
                     })}
                 </div>
             </div>
+
+            {/* Instructional Modal */}
+            {showInstruction && (
+                <InstructionModal onClose={handleInstructionClose} />
+            )}
         </div>
 
     );
