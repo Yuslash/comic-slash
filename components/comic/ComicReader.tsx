@@ -148,30 +148,40 @@ export default function ComicReader({ initialData, title, backLink }: ComicReade
                         transform: `translateX(-${currentSlide * (100 / totalSlides)}%)`
                     }}
                 >
-                    {data.map((scene) => (
-                        <div
-                            key={scene.id}
-                            style={{
-                                width: `${100 / totalSlides}%`,
-                                height: '100%',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                flexShrink: 0,
-                                flexGrow: 0
-                            }}
-                        >
-                            <div className="scene">
-                                <ComicSceneRenderer
-                                    scene={scene}
-                                    isReader={true}
-                                    revealedFrameIds={revealedFrames[String(scene.id)]} // Pass specific scene's set
-                                    onRevealFrame={(id) => revealFrame(scene.id, id)}
-                                />
+
+                    {data.map((scene, index) => {
+                        const isVisible = Math.abs(currentSlide - index) <= 1;
+
+                        return (
+                            <div
+                                key={scene.id}
+                                style={{
+                                    width: `${100 / totalSlides}%`,
+                                    height: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                    flexGrow: 0
+                                }}
+                            >
+                                {isVisible ? (
+                                    <div className="scene">
+                                        <ComicSceneRenderer
+                                            scene={scene}
+                                            isReader={true}
+                                            revealedFrameIds={revealedFrames[String(scene.id)]}
+                                            onRevealFrame={(id) => revealFrame(scene.id, id)}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="w-full h-full" /> // Placeholder
+                                )}
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </div>
+
     );
 }

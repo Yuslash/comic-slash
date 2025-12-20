@@ -71,7 +71,7 @@ export default function ReaderSeriesPage() {
                                 <div className="text-gray-500 font-rajdhani">No chapters released yet.</div>
                             ) : (
                                 chapters.map(chapter => (
-                                    <Link key={(chapter as any)._id || chapter.id} href={`/reader/${seriesId}/${(chapter as any)._id || chapter.id}`} className="group block">
+                                    <Link key={chapter._id || chapter.id} href={`/reader/${seriesId}/${chapter._id || chapter.id}`} className="group block">
                                         <div className="flex items-center justify-between p-4 bg-neutral-900/30 border-l-2 border-transparent hover:bg-neutral-900 hover:border-[#ccff00] transition-all duration-300">
                                             <div className="flex items-center gap-4">
                                                 <div className="font-teko text-gray-500 text-2xl group-hover:text-[#ccff00] w-12 text-center">

@@ -83,6 +83,7 @@ export interface Scene {
 export type ComicData = Scene[];
 
 export interface Chapter {
+    _id?: string;
     id: string;
     seriesId: string;
     title: string;
@@ -90,16 +91,21 @@ export interface Chapter {
     coverImage?: string;
     description?: string;
     data: ComicData;
+    password?: string;
+    published?: boolean;
     updatedAt: string;
 }
 
 export interface Series {
+    _id?: string;
     id: string;
     title: string;
     author: string;
     coverImage?: string;
     description?: string;
+    coverImageId?: string; // Correct for missing field seen in code
     tags: string[];
     status: 'ongoing' | 'completed' | 'hiatus';
+    published?: boolean;
     updatedAt: string;
 }
