@@ -9,7 +9,7 @@ export function InstructionModal({ onClose }: InstructionModalProps) {
     const [dontShowAgain, setDontShowAgain] = useState(false);
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
             <div className="relative w-full max-w-md p-6 mx-4 overflow-hidden border border-cyan-500/50 rounded-lg bg-black/90 shadow-[0_0_30px_rgba(6,182,212,0.3)] animate-in zoom-in-95 duration-300">
                 {/* Decorative Elements */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600" />
@@ -38,7 +38,7 @@ export function InstructionModal({ onClose }: InstructionModalProps) {
                             <span className="text-xl">👆</span> Click on frames to reveal them
                         </p>
                         <p className="text-sm text-cyan-400/70 mt-1">
-                            If you want to remove all blured click No Spoilers button in the menu to reveal everything at once.
+                            If you want to remove all blurred click No Spoilers button in the menu to reveal everything at once.
                         </p>
                     </div>
                 </div>
