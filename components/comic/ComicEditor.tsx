@@ -474,27 +474,43 @@ export default function ComicEditor({ initialData, onSave, backLink, seriesTitle
                 let newSizes = [...split.childrenSizes];
 
                 if (totalSelectedInSplit > 0) {
-                    // Weight children by their selected count
-                    // If Child A has 1 selected desc, Child B has 2 selected desc.
-                    // A gets 33%, B gets 66%.
-                    // This ensures A (1 frame) is visually same size as B's children (2 frames / 2 = 1 frame size).
-                    newSizes = childCounts.map(c => (c / totalSelectedInSplit) * 100);
+                    // NEW LOGIC: Only redistribute the space claimed by SELECTED children
+                    // Unselected children keep their size.
+                    const currentSizes = split.childrenSizes;
 
-                    // Edge case: If some children have 0 selected, they get 0%?
-                    // If the user didn't select them, maybe they want to hide them? Unlikely.
-                    // But strictly following "Equalize Selected":
-                    // If I select A and B, but C is unselected.
-                    // I want A and B to be equal.
-                    // My logic makes A and B equal only if they are in the same split.
-                    // This Weighted logic is specifically for "Equalize ALL nested".
+                    // 1. Identify participants (indices that have selected descendants)
+                    const participants = childCounts
+                        .map((count, index) => ({ count, index }))
+                        .filter(p => p.count > 0);
+
+                    // 2. Calculate total space available to redistribute (Sum of participants' current sizes)
+                    const totalParticipatingSize = participants.reduce((sum, p) => sum + currentSizes[p.index], 0);
+
+                    // 3. Calculate total weight (Total selected count)
+                    const totalParticipatingCount = participants.reduce((sum, p) => sum + p.count, 0);
+
+                    const newSizes = [...currentSizes];
+
+                    // 4. Distribute space proportionally
+                    participants.forEach(p => {
+                        const share = (p.count / totalParticipatingCount) * totalParticipatingSize;
+                        newSizes[p.index] = share;
+                    });
+
+                    // Unselected children (count 0) remain untouched in newSizes
+
+                    return {
+                        ...split,
+                        childrenSizes: newSizes,
+                        children: split.children.map(c => updateWeightsRec(c)) // Recurse
+                    } as SplitNode;
                 }
 
-                // Recurse down
+                // If nothing selected in this split, just recurse
                 const newChildren = split.children.map(c => updateWeightsRec(c));
 
                 return {
                     ...split,
-                    childrenSizes: newSizes,
                     children: newChildren
                 } as SplitNode;
             }

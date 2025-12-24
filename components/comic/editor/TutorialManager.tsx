@@ -152,7 +152,6 @@ export default function TutorialManager({ selectedFrameIds, scene }: TutorialMan
             target: '#btn-remove-multi',
             title: '7. Remove Frame',
             content: 'Made a mistake? Click the trash icon in the Multi-Select panel to remove frames.',
-            validate: () => frameCount < 3,
         },
         {
             target: '#btn-add-scene',
