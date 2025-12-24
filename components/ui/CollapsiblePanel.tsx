@@ -7,6 +7,7 @@ interface CollapsiblePanelProps {
     children: React.ReactNode;
     defaultOpen?: boolean;
     headerRight?: React.ReactNode;
+    id?: string;
 }
 
 export default function CollapsiblePanel({
@@ -14,12 +15,13 @@ export default function CollapsiblePanel({
     icon: Icon,
     children,
     defaultOpen = true,
-    headerRight
+    headerRight,
+    id
 }: CollapsiblePanelProps) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
     return (
-        <div className="border-b border-[#333] last:border-b-0">
+        <div id={id} className="border-b border-[#333] last:border-b-0">
             <div
                 className="flex items-center justify-between p-3 cursor-pointer hover:bg-white/5 transition-colors group select-none"
                 onClick={() => setIsOpen(!isOpen)}

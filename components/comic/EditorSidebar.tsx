@@ -140,6 +140,7 @@ export default function EditorSidebar({
 
                 {/* PANEL: LAYERS / SCENE */}
                 <CollapsiblePanel
+                    id="panel-scene"
                     title={`Scene ${sceneIndex + 1}`}
                     icon={Layers}
                     headerRight={
