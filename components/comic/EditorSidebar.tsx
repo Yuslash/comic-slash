@@ -155,6 +155,7 @@ export default function EditorSidebar({
                                 <div className="text-sm font-bold text-neon-green flex items-center gap-2">
                                     <Layers size={14} /> MULTI-SELECT ({selectedFrameIds.length})
                                     <button
+                                        id="btn-remove-multi"
                                         onClick={onRemoveFrames}
                                         title="Remove Selected"
                                         className="ml-auto text-red-500 hover:text-red-400 p-1 rounded hover:bg-white/10"
@@ -165,13 +166,14 @@ export default function EditorSidebar({
                                 <div className="text-xs text-gray-400">
                                     Multiple items selected.
                                 </div>
-                                <button onClick={onEqualizeSizes} className={styles.layoutBtn}>
+                                <button id="btn-equalize" onClick={onEqualizeSizes} className={styles.layoutBtn}>
                                     <Columns size={16} /> <span>Equalize Sizes</span>
                                 </button>
                                 {/* Multi-gap control can go into Layout Panel if desired, keeping simple for now */}
                                 <div className="mt-2">
                                     <label className={styles.label}>Gap</label>
                                     <input
+                                        id="gap-slider"
                                         type="range" min="0" max="50" defaultValue={0}
                                         onChange={(e) => onUpdateGap && selectedFrameIds.length && onUpdateGap(selectedFrameIds[0], parseInt(e.target.value))}
                                         className="w-full accent-neon-green"
