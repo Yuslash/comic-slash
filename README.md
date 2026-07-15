@@ -8,7 +8,29 @@
 > **A powerful, cinematic web-based comic creator and reader.**  
 > *Built for storytellers who want to break the mold.*
 
-![Studio Preview](https://placehold.co/1200x600/111/ccff00?text=Comic+Slash+Studio+Preview)
+![Studio Preview](public/screenshots/homepage.png)
+
+---
+
+## 📸 Screenshots
+
+### Homepage
+![Homepage](public/screenshots/homepage.png)
+
+### Studio — Series list
+![Studio series list](public/screenshots/studio%20page%201.png)
+
+### Studio — Scene editor
+![Studio scene editor](public/screenshots/studio%20page%202.png)
+
+### Reader — Series overview
+![Reader series overview](public/screenshots/reader%20page%201.png)
+
+### Reader — Chapter view
+![Reader chapter view](public/screenshots/reader%20page%202.png)
+
+### Reader — No spoilers mode
+![Reader no spoilers mode](public/screenshots/reader%20page%202%20without%20spoilers.png)
 
 ---
 
